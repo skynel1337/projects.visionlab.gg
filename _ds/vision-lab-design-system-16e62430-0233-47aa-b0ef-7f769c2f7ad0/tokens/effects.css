@@ -1,0 +1,36 @@
+/* ============================================================
+   Vision Lab — Effects: shadows, glows, textures, motion
+   Dark UI → shadows are deep + soft; elevation also reads
+   through a subtle top hairline highlight (the "chrome edge").
+   ============================================================ */
+:root {
+  /* Elevation shadows (stacked, low alpha — from brand spec) */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.25), 0 1px 1px rgba(0,0,0,0.21);
+  --shadow-md: 0 4px 10px rgba(0,0,0,0.25), 0 2px 4px rgba(0,0,0,0.21);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.45), 0 4px 10px rgba(0,0,0,0.25);
+  --shadow-xl: 0 28px 70px rgba(0,0,0,0.6), 0 10px 24px rgba(0,0,0,0.3);
+
+  /* The "chrome edge" — top inner highlight that sells dark surfaces */
+  --edge-top: inset 0 1px 0 rgba(255,255,255,0.06); /* @kind shadow */
+  --edge-inset: inset 0 1px 0 rgba(255,255,255,0.06), inset 0 -1px 0 rgba(0,0,0,0.5); /* @kind shadow */
+  /* Bright chrome bevel — pairs with --gradient-chrome to mimic the logo's lit edges */
+  --edge-chrome: inset 0 1.5px 0 rgba(255,255,255,0.92), inset 0 0 0 1px rgba(255,255,255,0.22), inset 0 -1.5px 1px rgba(255,255,255,0.18), 0 1px 3px rgba(0,0,0,0.6); /* @kind shadow */
+
+  /* Accent glow (use sparingly on hot elements) */
+  --glow-orange: 0 0 0 1px rgba(237,104,32,0.5), 0 8px 30px rgba(237,104,32,0.28); /* @kind shadow */
+  --focus-shadow: 0 0 0 3px var(--focus-ring); /* @kind shadow */
+
+  /* Blur for overlays / glass */
+  --blur-overlay: blur(14px); /* @kind other */
+  --blur-soft: blur(6px); /* @kind other */
+
+  /* Grain texture (shipped asset) — drop over dark surfaces low-opacity */
+  --texture-grain: url('../assets/grain-texture.jpg'); /* @kind other */
+
+  /* Motion — precise, mechanical (keycap press), no bounce */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* @kind other */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1); /* @kind other */
+  --dur-fast: 120ms; /* @kind other */
+  --dur-med: 220ms; /* @kind other */
+  --dur-slow: 400ms; /* @kind other */
+}

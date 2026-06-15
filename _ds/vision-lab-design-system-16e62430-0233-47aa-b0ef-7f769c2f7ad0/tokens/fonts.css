@@ -1,0 +1,13 @@
+/* ============================================================
+   Vision Lab — Webfonts
+   ------------------------------------------------------------
+   Body / UI : DM Sans  (exact brand font, Google Fonts)
+   Display   : Archivo  (SUBSTITUTE for "Normalidad Text Black",
+               a commercial Latinotype face not provided).
+               Archivo Black/900 is the nearest free neo-grotesque
+               match. Swap in the real Normalidad webfonts here
+               when licensed — only this @import + the
+               --font-display token need to change.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');

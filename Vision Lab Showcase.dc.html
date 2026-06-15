@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <title>Vision Lab — Selected Projects</title>
+  <link rel="icon" type="image/png" href="uploads/Avatar.png">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_ds/vision-lab-design-system-16e62430-0233-47aa-b0ef-7f769c2f7ad0/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/vision-lab-design-system-16e62430-0233-47aa-b0ef-7f769c2f7ad0/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/vision-lab-design-system-16e62430-0233-47aa-b0ef-7f769c2f7ad0/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/vision-lab-design-system-16e62430-0233-47aa-b0ef-7f769c2f7ad0/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/vision-lab-design-system-16e62430-0233-47aa-b0ef-7f769c2f7ad0/tokens/base.css">
+  <style>
+    html, body { margin: 0; padding: 0; background: #090909; }
+    @media (max-width: 820px) {
+      article.vl-card { display: flex !important; flex-direction: column !important; aspect-ratio: auto !important; }
+      .vl-info-col { border-left: none !important; border-top: 1px solid rgba(255,255,255,0.07) !important; overflow: visible !important; max-height: none !important; }
+      .vl-page-wrap { padding-left: 20px !important; padding-right: 20px !important; }
+    }
+  </style>
+</helmet>
+
+<!-- Vanta fixed bg -->
+<div ref="{{ bgRef }}" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;"></div>
+
+<div style="position: relative; z-index: 1; min-height: 100vh;">
+
+  <!-- ── HEADER ─────────────────────────────────────────────── -->
+  <header class="vl-page-wrap" style="max-width: 1200px; margin: 0 auto; padding: 88px 48px 64px;">
+    <img src="uploads/Vector-e720ab4d.png" alt="Vision Lab" style="height: 44px; width: auto; display: block; margin: 0 0 26px;">
+    <p style="font-family: 'DM Sans', sans-serif; font-size: 17px; font-weight: 500; color: #ed6820; margin: 0 0 36px; letter-spacing: 0.01em;">Selected Video Projects</p>
+    <p style="font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.72; color: rgba(255,255,255,0.5); max-width: 540px; margin: 0; text-wrap: pretty;">Our core video production team consists of six long-standing members. Below is a selection of projects delivered by our team, either end-to-end or through specific creative, production, post-production, rollout, or delivery tasks.</p>
+  </header>
+
+  <!-- Divider -->
+  <div class="vl-page-wrap" style="max-width: 1200px; margin: 0 auto; padding: 0 48px;">
+    <div style="height: 1px; background: rgba(255,255,255,0.07);"></div>
+  </div>
+
+  <!-- ── PROJECT LIST ────────────────────────────────────────── -->
+  <main class="vl-page-wrap" style="max-width: 1200px; margin: 0 auto; padding: 64px 48px 128px; display: flex; flex-direction: column; gap: 40px;">
+    <sc-for list="{{ projects }}" as="project" hint-placeholder-count="4">
+
+      <!--
+        article IS the grid — 65/35 split.
+        aspect-ratio: 320/117 = 1 / (0.65 × 0.5625)
+        This makes card height exactly = video height, zero gap below video.
+        overflow: hidden clips info column if content is taller at narrow widths.
+      -->
+      <article class="vl-card" style="display: grid; grid-template-columns: 65fr 35fr; aspect-ratio: 320/117; overflow: hidden; background: #151515; border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; box-shadow: 0 12px 40px rgba(0,0,0,0.55), 0 4px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05); transition: box-shadow 220ms ease, border-color 220ms;" style-hover="box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 6px 18px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.13);">
+
+        <!-- VIDEO COLUMN — fills exactly to card height -->
+        <div style="position: relative; overflow: hidden;">
+          <div style="position: relative; padding-top: 56.25%; width: 100%;">
+            <iframe
+              src="{{ project.vimeoSrc }}"
+              frameborder="0"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+              title="{{ project.name }}"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;display:block;border:none;"
+            ></iframe>
+          </div>
+        </div>
+
+        <!-- INFO COLUMN — vertically centered, clips at card boundary -->
+        <div class="vl-info-col" style="position: relative; display: flex; flex-direction: column; justify-content: center; padding: 20px 24px; border-left: 1px solid rgba(255,255,255,0.07); overflow: hidden;">
+          <!-- Number pinned to top-right of info column always -->
+          <span style="position: absolute; top: 16px; right: 20px; font-family: ui-monospace,'SF Mono',monospace; font-size: 10px; color: rgba(255,255,255,0.18); letter-spacing: 0.06em;">{{ project.num }}</span>
+          <!-- Brand tag -->
+          <div style="margin-bottom: 14px;">
+            <span style="display: inline-block; padding: 3px 9px; background: rgba(237,104,32,0.1); border: 1px solid rgba(237,104,32,0.22); border-radius: 5px; font-family: 'DM Sans', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #ed6820; white-space: nowrap;">{{ project.brand }}</span>
+          </div>
+          <h2 style="font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 24px; line-height: 1.08; letter-spacing: -0.03em; color: #ffffff; margin: 0 0 12px; text-wrap: pretty;">{{ project.name }}</h2>
+          <div>{{ project.descEl }}</div>
+        </div>
+
+      </article>
+
+    </sc-for>
+  </main>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────── -->
+  <footer class="vl-page-wrap" style="max-width: 1200px; margin: 0 auto; padding: 28px 48px 48px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+    <span style="font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 14px; letter-spacing: -0.02em; color: rgba(255,255,255,0.28);">Vision Lab</span>
+    <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: rgba(255,255,255,0.28);">Contact: <a href="mailto:mark@visionlab.gg" style="color: inherit; text-decoration: none; transition: color 160ms;" style-hover="color: #ed6820;">mark@visionlab.gg</a></span>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  _bgRef = React.createRef();
+  _vanta = null;
+
+  componentDidMount() {
+    // White crosshair cursor — no dot, arms 15% shorter, black 1.5px outline + white 1.5px
+    var s = '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">'
+      + '<line x1="16" y1="2" x2="16" y2="13" stroke="black" stroke-width="3.5" stroke-linecap="round"/>'
+      + '<line x1="16" y1="19" x2="16" y2="30" stroke="black" stroke-width="3.5" stroke-linecap="round"/>'
+      + '<line x1="2" y1="16" x2="13" y2="16" stroke="black" stroke-width="3.5" stroke-linecap="round"/>'
+      + '<line x1="19" y1="16" x2="30" y2="16" stroke="black" stroke-width="3.5" stroke-linecap="round"/>'
+      + '<line x1="16" y1="2" x2="16" y2="13" stroke="white" stroke-width="1.5" stroke-linecap="round"/>'
+      + '<line x1="16" y1="19" x2="16" y2="30" stroke="white" stroke-width="1.5" stroke-linecap="round"/>'
+      + '<line x1="2" y1="16" x2="13" y2="16" stroke="white" stroke-width="1.5" stroke-linecap="round"/>'
+      + '<line x1="19" y1="16" x2="30" y2="16" stroke="white" stroke-width="1.5" stroke-linecap="round"/>'
+      + '</svg>';
+    document.body.style.cursor = 'url("uploads/cursor-white.cur"), crosshair';
+
+    // Vanta FOG
+    var self = this;
+    function initVanta() {
+      if (window.VANTA && self._bgRef.current) {
+        self._vanta = window.VANTA.FOG({
+          el: self._bgRef.current, THREE: window.THREE,
+          mouseControls: true, touchControls: true, gyroControls: false,
+          minHeight: 200, minWidth: 200,
+          highlightColor: 0x4d2e00, midtoneColor: 0x0, lowlightColor: 0x0, baseColor: 0x0,
+          blurFactor: 0.90, speed: 0.30, zoom: 0.40
+        });
+      }
+    }
+    function loadVanta() {
+      var sv = document.createElement('script');
+      sv.src = 'uploads/vanta.fog.min-1345d4ad.js';
+      sv.onload = initVanta;
+      document.head.appendChild(sv);
+    }
+    if (window.VANTA) { initVanta(); }
+    else if (window.THREE) { loadVanta(); }
+    else {
+      var t = document.createElement('script');
+      t.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js';
+      t.onload = loadVanta;
+      document.head.appendChild(t);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this._vanta) { this._vanta.destroy(); this._vanta = null; }
+  }
+
+  renderVals() {
+    var PARAMS = 'badge=0&autopause=0&player_id=0&app_id=58479&loop=1&title=0&byline=0&portrait=0&dnt=1&color=ed6820&share=0';
+
+    function buildDescEl(desc) {
+      var sIntro = { fontFamily:"'DM Sans',sans-serif", fontSize:'9px', fontWeight:600, letterSpacing:'0.12em', textTransform:'uppercase', color:'rgba(255,255,255,0.3)', margin:'0 0 6px 0' };
+      var sUl   = { listStyle:'none', padding:0, margin:0 };
+      var sLi   = { display:'flex', alignItems:'flex-start', gap:'8px', marginBottom:'3px' };
+      var sDot  = { flexShrink:0, width:'3px', height:'3px', borderRadius:'50%', background:'#ed6820', marginTop:'6px' };
+      var sCap  = { fontFamily:"'DM Sans',sans-serif", fontSize:'13px', lineHeight:'1.48', color:'#cccccc' };
+      var sTxt  = { fontFamily:"'DM Sans',sans-serif", fontSize:'13px', lineHeight:'1.6', color:'#cccccc', margin:0 };
+
+      if (desc.plain) return React.createElement('p', { style: sTxt }, desc.plain);
+      var ch = [];
+      if (desc.intro) ch.push(React.createElement('p', { key:'i', style: sIntro }, desc.intro));
+      ch.push(React.createElement('ul', { key:'u', style: sUl },
+        desc.items.map(function(item, idx) {
+          return React.createElement('li', { key: idx, style: sLi },
+            React.createElement('span', { style: sDot }),
+            React.createElement('span', { style: sCap }, item)
+          );
+        })
+      ));
+      return React.createElement('div', null, ch);
+    }
+
+    var RAW = [
+      // 1 ← orig 9
+      { brand:'Inner Circle', name:'IC X BETON', videoId:'1179904041',
+        desc:{ intro:'Full-cycle delivery', items:['Concept development','Creative direction','Production','Directing','3D & Motion design','AI visuals','Editing & Color grading','Sound design','Rollout materials'] } },
+      // 2 ← orig 11
+      { brand:'Inner Circle', name:'CS2 Roster Announcement', videoId:'1134962576',
+        desc:{ intro:'Full-cycle delivery', items:['Concept development','Creative direction','Production','Directing','Post-production','Final delivery','Rollout materials'] } },
+      // 3 ← orig 10
+      { brand:'Inner Circle', name:'Jersey Reveal', videoId:'1134973234',
+        desc:{ intro:'Full-cycle delivery', items:['Concept development','Creative direction','Design','Directing','3D','Editing','Color grading','Sound design'] } },
+      // 4 ← orig 7
+      { brand:'Inner Circle', name:'Talents Chosen Trailer', videoId:'1134955722',
+        desc:{ intro:'Full-cycle delivery', items:['Concept development','Creative direction','Production','Directing','Post-production','Final delivery','Rollout materials'] } },
+      // 5 ← orig 12
+      { brand:'Inner Circle', name:'Org Launch Trailer', videoId:'1134954847',
+        desc:{ intro:'Full-cycle delivery', items:['Concept development','Creative direction','Production','Directing','Post-production','Final delivery','Rollout materials'] } },
+      // 6 ← orig 6
+      { brand:'Inner Circle', name:'Talents Campaign Launch', videoId:'1134960087',
+        desc:{ intro:'Full-cycle delivery', items:['Concept development','Creative direction','Production','Directing','Post-production','Final delivery','Rollout materials'] } },
+      // 7 ← orig 5
+      { brand:'NAVI', name:'PRO KIT', videoId:'1201175694',
+        desc:{ intro:'', items:['Assistant directing support','On-set shooting'] } },
+      // 8 ← orig 20
+      { brand:'Esports', name:'9INExPUSULABET', videoId:'1201182622',
+        desc:{ intro:'', items:['Cinematography','Editing','Color grading'] } },
+      // 9 ← orig 1
+      { brand:'NAVI', name:'Valorant Kickoff Announce', videoId:'1134958124',
+        desc:{ intro:'', items:['Assistant directing support','On-set shooting'] } },
+      // 10 ← orig 3
+      { brand:'NAVI', name:'Valorant Roster Announcement', videoId:'1201173198',
+        desc:{ intro:'', items:['Creative direction','Directing','On-set shooting','Post-production','Final asset delivery'] } },
+      // 11 ← orig 15
+      { brand:'s1mple', name:'Course Intro', videoId:'1201169288',
+        desc:{ intro:'', items:['Concept development','Creative direction','3D','Editing','Sound design'] } },
+      // 12 ← orig 14
+      { brand:'s1mple', name:'Course Trailer', videoId:'863675515',
+        desc:{ intro:'Full-cycle delivery', items:['Concept development','Creative direction','Production','Directing','3D','Post-production','Final delivery'] } },
+      // 13 ← orig 13
+      { brand:'s1mple', name:'Demo Lesson', videoId:'865491383',
+        desc:{ intro:'Full-cycle delivery', items:['Concept development','Creative direction','Production','Directing','Post-production','Final delivery'] } },
+      // 14 ← orig 2
+      { brand:'NAVI', name:'cNed Profile', videoId:'1201189926',
+        desc:{ intro:'', items:['Creative direction','Production','Directing','On-set shooting','Editing','Color grading','Sound design'] } },
+      // 15 ← orig 21
+      { brand:'Esports', name:'BETERA', videoId:'1201182623',
+        desc:{ intro:'', items:['Camera operation','Focus-pulling support','Editing'] } },
+      // 16 ← orig 4
+      { brand:'NAVI', name:'Hub Announce', videoId:'1201189683',
+        desc:{ intro:'', items:['Creative direction','On-set shooting','Editing','Voiceover rework'] } },
+      // 17 ← orig 18 — new video ID
+      { brand:'Cars Project', name:'TANK 300 — Feel Alive', videoId:'1201278859',
+        desc:{ intro:'', items:['Editing','Final cut delivery'] } },
+      // 18 ← orig 19
+      { brand:'Cars Project', name:'Drift Fest Trailer', videoId:'1201210650',
+        desc:{ intro:'Full-cycle delivery', items:['Footage selection','AI visuals','Edit direction','Color grading','Sound design','Final delivery'] } },
+      // 19 ← orig 26
+      { brand:'Music', name:'MARGARET — JET LAG', videoId:'1201190406',
+        desc:{ intro:'Production management & casting coordination', items:['Brief analysis','Budgeting','Planning','Logistics','On-set coordination','Material delivery'] } },
+      // 20 ← orig 23
+      { brand:'Cars Project', name:'PORSCHE 911 GT3 RS', videoId:'1201190360',
+        desc:{ intro:'Production management & casting coordination', items:['Brief analysis','Budgeting','Planning','Logistics','Team coordination','Shoot support','Material delivery'] } },
+      // 21 ← orig 25
+      { brand:'Commercial', name:'SOLO', videoId:'1200741045',
+        desc:{ intro:'Production management & casting coordination', items:['Brief analysis','Budgeting','Planning','Logistics','On-set coordination','Material delivery'] } },
+      // 22 ← orig 24
+      { brand:'Commercial', name:'BETTER ME — DANCE INTO CONFIDENCE', videoId:'1200741044',
+        desc:{ intro:'Production management & casting coordination', items:['Brief analysis','Budgeting','Planning','Logistics','On-set coordination','Material delivery'] } },
+      // 23 ← orig 27
+      { brand:'Commercial', name:'K1X', videoId:'1200741046',
+        desc:{ intro:'', items:['Line production','Casting coordination'] } },
+      // 24 ← orig 28
+      { brand:'Music', name:'Michelle Andrade — Na Samoti', videoId:'1201210649',
+        desc:{ intro:'', items:['Line production'] } },
+      // 25 ← orig 8
+      { brand:'Inner Circle', name:'Roster Teaser', videoId:'1201175239',
+        desc:{ intro:'', items:['Concept development','Creative direction','Design','3D','Editing','Sound design'] } },
+      // 26 ← orig 22
+      { brand:'Vision Lab', name:'Motion & VFX Fragments', videoId:'1201210651',
+        desc:{ plain:'Selected motion design, VFX and post-production elements across wider project work.' } },
+      // 27 ← orig 17 — new video ID + private hash (vertical 9:16 video, letterboxed in 16:9 player)
+      { brand:'AI Video', name:'Limitless Esports Podcast', videoId:'1201278858', hash:'6b317145ea',
+        desc:{ intro:'', items:['Concept development','Creative direction','Scripting','Generation workflow','Editing','Color grading','Sound design'] } },
+      // 28 ← orig 16 — new video ID
+      { brand:'AI Video', name:'MAX PAYNE: RELAPSE', videoId:'1201278857',
+        desc:{ intro:'', items:['Concept development','Creative direction','Scripting','Generation workflow','Editing','Color grading','Sound design'] } },
+    ];
+
+    var projects = RAW.map(function(p, i) {
+      var qs = p.hash ? ('h=' + p.hash + '&' + PARAMS) : PARAMS;
+      var src = 'https://player.vimeo.com/video/' + p.videoId + '?' + qs;
+      return {
+        brand:     p.brand,
+        name:      p.name,
+        videoId:   p.videoId,
+        vimeoSrc:  src,
+        num:       String(i + 1).padStart(2, '0'),
+        descEl:    buildDescEl(p.desc),
+      };
+    });
+
+    return { projects: projects, bgRef: this._bgRef };
+  }
+}
+
+</script>
+</body>
+</html>

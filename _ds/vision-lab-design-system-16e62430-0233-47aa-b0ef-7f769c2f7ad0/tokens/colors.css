@@ -1,0 +1,80 @@
+/* ============================================================
+   Vision Lab — Color tokens
+   Minimalist · chrome · futurism. Near-black canvas, white type,
+   one hot orange accent, with a chrome/metallic gradient set
+   for the logo + premium surfaces.
+   ============================================================ */
+:root {
+  /* ---- Brand accent (orange) ---- */
+  --vl-orange-50:  #fdf0e8;
+  --vl-orange-200: #f7b488;
+  --vl-orange-400: #f2843e;
+  --vl-orange-500: #ed6820;  /* PRIMARY — brand orange */
+  --vl-orange-600: #d2570f;
+  --vl-orange-700: #a8440b;
+
+  /* ---- Signal red (used as accent stroke / danger) ---- */
+  --vl-red-400: #ff3657;
+  --vl-red-500: #d22d48;
+
+  /* ---- Ink / neutrals (true black → white) ---- */
+  --vl-black:   #000000;
+  --vl-ink-950: #090909;  /* canvas base            */
+  --vl-ink-900: #0b0b0b;  /* canvas gradient end    */
+  --vl-ink-850: #0d0d0d;
+  --vl-ink-800: #101010;  /* raised surface         */
+  --vl-ink-750: #121212;  /* canvas gradient start  */
+  --vl-ink-700: #151515;  /* card / panel           */
+  --vl-ink-650: #181818;
+  --vl-ink-600: #1f1f1f;  /* card hover / inset     */
+  --vl-ink-500: #2c2c2c;  /* hairline / border base */
+  --vl-ink-400: #444444;  /* strong border         */
+  --vl-ink-300: #474747;
+  --vl-gray-500:#777777;  /* muted text            */
+  --vl-gray-300:#999999;
+  --vl-gray-200:#cccccc;
+  --vl-gray-100:#d9d9d9;  /* dim white / ascii fill */
+  --vl-white:   #ffffff;
+
+  /* ---- Chrome / metallic — graphite body + bright edges, like the logo ---- */
+  --vl-chrome-rim:   #ffffff;  /* bright bevel edge       */
+  --vl-chrome-light: #5a5a60;  /* upper/lower metallic band */
+  --vl-chrome-mid:   #2b2b2f;  /* main uniform face        */
+  --vl-chrome-dark:  #1d1d20;  /* face core / shadow       */
+  --vl-chrome-deep:  #141416;
+
+  /* ============== Semantic aliases ============== */
+  /* Surfaces */
+  --surface-canvas:   var(--vl-ink-950);
+  --surface-raised:   var(--vl-ink-800);
+  --surface-card:     var(--vl-ink-700);
+  --surface-card-hover: var(--vl-ink-600);
+  --surface-inset:    var(--vl-black);
+  --surface-overlay:  rgba(9, 9, 9, 0.72);
+
+  /* Canvas + chrome gradients */
+  --gradient-canvas:  linear-gradient(180deg, var(--vl-ink-750) 0%, var(--vl-ink-900) 100%);
+  --gradient-radial:  radial-gradient(120% 120% at 50% 0%, var(--vl-ink-800) 0%, var(--vl-black) 100%);
+  --gradient-chrome:  linear-gradient(174deg, var(--vl-chrome-light) 0%, var(--vl-chrome-mid) 22%, var(--vl-chrome-dark) 50%, var(--vl-chrome-mid) 78%, var(--vl-chrome-light) 100%);
+  --gradient-orange:  linear-gradient(180deg, var(--vl-orange-400) 0%, var(--vl-orange-600) 100%);
+
+  /* Text */
+  --text-primary:   var(--vl-white);
+  --text-secondary: var(--vl-gray-200);
+  --text-muted:     var(--vl-gray-500);
+  --text-faint:     var(--vl-ink-400);
+  --text-accent:    var(--vl-orange-500);
+  --text-on-accent: var(--vl-ink-650);
+
+  /* Borders / strokes */
+  --border-hairline: rgba(255, 255, 255, 0.08);
+  --border-subtle:   rgba(255, 255, 255, 0.12);
+  --border-strong:   var(--vl-ink-500);
+  --border-accent:   var(--vl-orange-500);
+
+  /* Accent */
+  --accent:        var(--vl-orange-500);
+  --accent-hover:  var(--vl-orange-400);
+  --accent-press:  var(--vl-orange-600);
+  --focus-ring:    rgba(237, 104, 32, 0.55);
+}
